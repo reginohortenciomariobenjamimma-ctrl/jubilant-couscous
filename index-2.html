@@ -2,36 +2,31 @@
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#06142f">
-<title>Conecta+ | Conversas e Videochamadas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071b3b">
+<title>Conecta+</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
 body{
   font-family:Arial,sans-serif;
-  background:#020817;
-  color:#fff;
-  min-height:100vh;
-}
-
-.app{
-  min-height:100vh;
-  background:
-  radial-gradient(circle at 10% 10%,rgba(0,212,255,.22),transparent 30%),
-  radial-gradient(circle at 90% 30%,rgba(41,239,82,.12),transparent 25%),
-  linear-gradient(145deg,#020817,#071b3b,#020817);
+  background:#06142f;
+  color:white;
 }
 
 header{
   height:70px;
-  padding:0 6%;
+  padding:0 20px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  border-bottom:1px solid rgba(255,255,255,.1);
-  background:rgba(2,8,23,.85);
+  background:#081d3d;
+  border-bottom:1px solid #18345b;
 }
 
 .logo{
@@ -43,229 +38,222 @@ header{
 }
 
 .logo-icon{
-  width:43px;
-  height:43px;
-  display:grid;
-  place-items:center;
-  border-radius:13px;
-  background:linear-gradient(135deg,#00d4ff,#087cff,#29ef52);
-  font-size:22px;
+  width:42px;
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  background:linear-gradient(135deg,#00d4ff,#087cff);
 }
 
 .logo-name{
-  background:linear-gradient(90deg,#fff,#21eaff,#29ef52);
-  -webkit-background-clip:text;
-  color:transparent;
+  color:#20ddff;
 }
 
-.header-login{
-  padding:9px 18px;
+.entrar-topo{
+  padding:10px 18px;
   border-radius:22px;
-  color:white;
+  border:1px solid #386087;
   background:transparent;
-  border:1px solid #53647e;
+  color:white;
 }
 
 .hero{
-  max-width:1000px;
-  margin:auto;
   text-align:center;
-  padding:55px 20px;
+  padding:55px 20px 30px;
 }
 
 .hero h1{
-  font-size:clamp(38px,7vw,70px);
-  line-height:1;
-  font-weight:900;
+  font-size:42px;
+  line-height:1.1;
+  margin-bottom:20px;
 }
 
-.blue{color:#19eaff}
-.green{color:#31ed49}
+.azul{
+  color:#19eaff;
+}
+
+.verde{
+  color:#31ed49;
+}
 
 .hero p{
-  color:#b9c7df;
-  font-size:18px;
   max-width:650px;
-  margin:20px auto 28px;
+  margin:auto;
+  color:#b8c8df;
+  font-size:17px;
+  line-height:1.6;
 }
 
-.buttons{
+.botoes{
   display:flex;
   justify-content:center;
   gap:12px;
+  margin-top:25px;
   flex-wrap:wrap;
 }
 
-.btn{
-  border:0;
-  border-radius:30px;
+.botao{
   padding:14px 28px;
-  font-weight:bold;
-  color:white;
-}
-
-.primary{
-  background:linear-gradient(90deg,#087cff,#18d7ff,#29e94d);
-}
-
-.secondary{
-  background:#111f34;
-  border:1px solid #40516d;
-}
-
-.phone{
-  width:min(390px,92vw);
-  margin:40px auto 0;
-  padding:12px;
-  border-radius:40px;
-  background:#05080f;
-  border:2px solid #29364d;
-  box-shadow:0 25px 80px rgba(0,0,0,.7);
-}
-
-.screen{
-  min-height:650px;
   border-radius:30px;
-  overflow:hidden;
-  background:#071326;
-}
-
-.top{
-  display:flex;
-  justify-content:space-between;
-  padding:15px 20px;
-  color:#aebbd1;
-  font-size:13px;
-}
-
-.app-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:8px 18px 15px;
-}
-
-.app-name{
-  font-size:23px;
+  border:none;
+  color:white;
   font-weight:bold;
+  font-size:16px;
 }
 
-.search{
-  margin:0 15px 18px;
+.botao-principal{
+  background:linear-gradient(90deg,#087cff,#16d9ff);
+}
+
+.botao-secundario{
+  background:#122746;
+  border:1px solid #355275;
+}
+
+.cartao{
+  width:min(390px,92%);
+  margin:35px auto;
+  padding:12px;
+  border-radius:35px;
+  background:#030912;
+  border:2px solid #263b59;
+}
+
+.telefone{
+  background:#081a33;
+  border-radius:27px;
+  overflow:hidden;
+  min-height:520px;
+}
+
+.topo-telefone{
+  display:flex;
+  justify-content:space-between;
+  padding:15px 18px;
+  color:#a9bad1;
+}
+
+.titulo-app{
+  padding:10px 18px;
+  font-size:24px;
+  font-weight:bold;
+  color:#20ddff;
+}
+
+.pesquisa{
+  margin:10px 15px;
   padding:13px;
-  border-radius:17px;
-  background:#14223a;
-  color:#8d9db5;
-  text-align:left;
+  border-radius:15px;
+  background:#142a48;
+  color:#879ab4;
 }
 
-.title{
-  padding:0 18px 10px;
+.titulo-conversas{
+  padding:15px 18px 5px;
   font-size:19px;
   font-weight:bold;
-  text-align:left;
 }
 
-.chat{
+.conversa{
   display:flex;
   align-items:center;
-  gap:10px;
-  margin:7px 12px;
-  padding:11px;
-  border-radius:18px;
-  background:#182740;
-  text-align:left;
+  gap:12px;
+  margin:8px 12px;
+  padding:12px;
+  background:#122541;
+  border-radius:17px;
 }
 
 .avatar{
   width:48px;
   height:48px;
   border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg,#18b9ff,#7c3cff);
-  font-size:21px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#087cff,#8b45ff);
+  font-size:22px;
 }
 
-.info{
+.texto{
   flex:1;
+  text-align:left;
 }
 
-.info strong{
+.texto strong{
   display:block;
 }
 
-.info small{
-  color:#94a4bd;
+.texto small{
+  color:#94a8c2;
 }
 
-.badge{
+.numero{
   background:#087cff;
   width:23px;
   height:23px;
   border-radius:50%;
-  display:grid;
-  place-items:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   font-size:12px;
 }
 
-.nav{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
+.menu{
   margin-top:18px;
   padding:15px 5px;
-  background:#0b172a;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  background:#0b1d35;
 }
 
-.nav button{
+.menu button{
   border:0;
   background:transparent;
-  color:#8796ae;
-  font-size:11px;
+  color:#9babc1;
+  font-size:12px;
 }
 
-.nav button:first-child{
-  color:#16dfff;
-}
-
-.nav-icon{
+.menu span{
   display:block;
   font-size:22px;
   margin-bottom:4px;
 }
 
-.features{
-  max-width:1000px;
+.recursos{
+  max-width:900px;
   margin:auto;
   padding:20px;
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:repeat(2,1fr);
   gap:15px;
 }
 
-.feature{
+.recurso{
   padding:20px;
   text-align:center;
-  border-radius:20px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
+  background:#0b1d35;
+  border:1px solid #19385d;
+  border-radius:18px;
 }
 
-.feature-icon{
+.recurso div{
   font-size:30px;
   margin-bottom:8px;
 }
 
-.feature p{
-  color:#8fa0b9;
-  font-size:12px;
+.recurso p{
+  color:#91a5c0;
   margin-top:5px;
+  font-size:13px;
 }
 
 footer{
   text-align:center;
-  padding:30px;
-  color:#667993;
+  padding:35px 15px;
+  color:#70849f;
 }
 
 /* JANELA */
@@ -273,96 +261,73 @@ footer{
 .modal{
   display:none;
   position:fixed;
-  inset:0;
   z-index:100;
+  inset:0;
   background:rgba(0,0,0,.75);
   align-items:center;
   justify-content:center;
   padding:20px;
 }
 
-.modal.show{
+.modal.ativo{
   display:flex;
 }
 
-.box{
-  width:min(410px,100%);
+.caixa{
+  width:min(400px,100%);
+  background:#0b1d35;
+  border:1px solid #315176;
+  border-radius:22px;
   padding:25px;
-  border-radius:25px;
-  background:#0b172a;
-  border:1px solid #31415b;
 }
 
-.close{
+.fechar{
   float:right;
   background:none;
-  border:0;
+  border:none;
   color:#aaa;
   font-size:25px;
 }
 
-.box h2{
+.caixa h2{
   margin-bottom:8px;
 }
 
-.box p{
-  color:#92a3bc;
+.caixa p{
+  color:#9aacc4;
   margin-bottom:18px;
-  font-size:14px;
 }
 
-.tabs{
-  display:flex;
-  gap:7px;
-  margin-bottom:12px;
-}
-
-.tab{
-  flex:1;
-  padding:10px;
-  border-radius:12px;
-  border:1px solid #33445e;
-  background:#111f34;
-  color:white;
-}
-
-.tab.active{
-  background:#087cff;
-}
-
-.input{
+.campo{
   width:100%;
   padding:13px;
   margin:6px 0;
-  border-radius:13px;
-  border:1px solid #33445e;
-  background:#071326;
+  border-radius:12px;
+  border:1px solid #355273;
+  background:#06142f;
   color:white;
-  outline:none;
 }
 
-.continue{
+.continuar{
   width:100%;
   margin-top:10px;
 }
 
-.message{
+.mensagem{
   margin-top:12px;
-  color:#29ef52;
-  font-size:13px;
+  color:#31ed49;
+  font-size:14px;
 }
 
-@media(max-width:700px){
-  .features{
-    grid-template-columns:repeat(2,1fr);
+@media(max-width:600px){
+  .hero h1{
+    font-size:38px;
   }
 }
 </style>
 </head>
 
 <body>
-
-<div class="app">
 
 <header>
 
@@ -371,7 +336,7 @@ footer{
 <div class="logo-name">Conecta+</div>
 </div>
 
-<button class="header-login" onclick="abrir('login')">
+<button class="entrar-topo" onclick="abrirLogin()">
 Entrar
 </button>
 
@@ -381,9 +346,9 @@ Entrar
 <section class="hero">
 
 <h1>
-Converse <span class="blue">•</span>
-Ligue <span class="blue">•</span>
-Veja <span class="green">•</span>
+Converse <span class="azul">•</span>
+Ligue <span class="azul">•</span>
+Veja <span class="verde">•</span>
 Conecte-se
 </h1>
 
@@ -392,95 +357,94 @@ Conecta+ é uma plataforma para conversar,
 fazer chamadas de voz e realizar videochamadas.
 </p>
 
-<div class="buttons">
+<div class="botoes">
 
-<button class="btn primary" onclick="abrir('login')">
+<button class="botao botao-principal" onclick="abrirLogin()">
 Entrar
 </button>
 
-<button class="btn secondary" onclick="abrir('registo')">
+<button class="botao botao-secundario" onclick="abrirRegisto()">
 Criar conta
 </button>
 
 </div>
 
 
-<div class="phone">
+<div class="cartao">
 
-<div class="screen">
+<div class="telefone">
 
-<div class="top">
+<div class="topo-telefone">
 <span>9:41</span>
-<span>● ◔ ▮</span>
+<span>📶 🔋</span>
 </div>
 
-<div class="app-head">
-<strong class="app-name">Conecta+</strong>
-<span>⌕ ⋮</span>
+<div class="titulo-app">
+Conecta+
 </div>
 
-<div class="search">
+<div class="pesquisa">
 🔎 Pesquisar pessoas ou grupos
 </div>
 
-<div class="title">
+<div class="titulo-conversas">
 Conversas
 </div>
 
-<div class="chat">
+<div class="conversa">
 <div class="avatar">👨🏾</div>
-<div class="info">
+<div class="texto">
 <strong>João Carlos</strong>
 <small>Olá, tudo bem?</small>
 </div>
-<div class="badge">2</div>
+<div class="numero">2</div>
 </div>
 
-<div class="chat">
+<div class="conversa">
 <div class="avatar">👩🏾</div>
-<div class="info">
+<div class="texto">
 <strong>Maria Beatriz</strong>
 <small>Vamos fazer uma chamada?</small>
 </div>
-<div class="badge">1</div>
+<div class="numero">1</div>
 </div>
 
-<div class="chat">
+<div class="conversa">
 <div class="avatar">👥</div>
-<div class="info">
+<div class="texto">
 <strong>Grupo Família ❤️</strong>
 <small>Almoço domingo!</small>
 </div>
-<div class="badge">5</div>
+<div class="numero">5</div>
 </div>
 
-<div class="chat">
+<div class="conversa">
 <div class="avatar">👨🏾</div>
-<div class="info">
+<div class="texto">
 <strong>Paulo</strong>
 <small>🎤 Mensagem de voz</small>
 </div>
 </div>
 
-<div class="nav">
+<div class="menu">
 
-<button onclick="demo('Conversas')">
-<span class="nav-icon">💬</span>
+<button onclick="mostrar('Conversas')">
+<span>💬</span>
 Conversas
 </button>
 
-<button onclick="demo('Chamadas')">
-<span class="nav-icon">📞</span>
+<button onclick="mostrar('Chamadas')">
+<span>📞</span>
 Chamadas
 </button>
 
-<button onclick="demo('Status')">
-<span class="nav-icon">◉</span>
-Status
+<button onclick="mostrar('Vídeos')">
+<span>📹</span>
+Vídeos
 </button>
 
-<button onclick="demo('Perfil')">
-<span class="nav-icon">👤</span>
+<button onclick="mostrar('Perfil')">
+<span>👤</span>
 Perfil
 </button>
 
@@ -492,54 +456,30 @@ Perfil
 </section>
 
 
-<section class="features">
+<section class="recursos">
 
-<div class="feature">
-<div class="feature-icon">💬</div>
+<div class="recurso">
+<div>💬</div>
 <strong>Mensagens</strong>
-<p>Converse em tempo real.</p>
+<p>Converse com seus contactos.</p>
 </div>
 
-<div class="feature">
-<div class="feature-icon">📞</div>
+<div class="recurso">
+<div>📞</div>
 <strong>Chamadas</strong>
 <p>Faça chamadas de voz.</p>
 </div>
 
-<div class="feature">
-<div class="feature-icon">📹</div>
-<strong>Vídeo</strong>
-<p>Faça videochamadas.</p>
+<div class="recurso">
+<div>📹</div>
+<strong>Videochamadas</strong>
+<p>Veja seus contactos.</p>
 </div>
 
-<div class="feature">
-<div class="feature-icon">👥</div>
+<div class="recurso">
+<div>👥</div>
 <strong>Grupos</strong>
-<p>Converse em grupo.</p>
-</div>
-
-<div class="feature">
-<div class="feature-icon">🔒</div>
-<strong>Privacidade</strong>
-<p>Proteja sua conta.</p>
-</div>
-
-<div class="feature">
-<div class="feature-icon">📷</div>
-<strong>Fotos e vídeos</strong>
-<p>Partilhe momentos.</p>
-</div>
-
-<div class="feature">
-<div class="feature-icon">🎤</div>
-<strong>Áudios</strong>
-<p>Envie mensagens de voz.</p>
-</div>
-
-<div class="feature">
-<div class="feature-icon">🌐</div>
-<strong>Conexão</strong>
-<p>Conecte-se com pessoas.</p>
+<p>Converse com várias pessoas.</p>
 </div>
 
 </section>
@@ -549,16 +489,16 @@ Perfil
 Conecta+ • Converse. Ligue. Veja. Conecte-se.
 </footer>
 
-</div>
 
-
-<!-- LOGIN E CRIAÇÃO DE CONTA -->
+<!-- JANELA -->
 
 <div class="modal" id="modal">
 
-<div class="box">
+<div class="caixa">
 
-<button class="close" onclick="fechar()">×</button>
+<button class="fechar" onclick="fechar()">
+×
+</button>
 
 <h2 id="titulo">
 Entrar no Conecta+
@@ -568,48 +508,36 @@ Entrar no Conecta+
 Aceda à sua conta para continuar.
 </p>
 
-<div class="tabs">
-
-<button id="tabLogin"
-class="tab active"
-onclick="modo('login')">
-Entrar
-</button>
-
-<button id="tabRegisto"
-class="tab"
-onclick="modo('registo')">
-Criar conta
-</button>
-
-</div>
-
 <input
 id="nome"
-class="input"
+class="campo"
 placeholder="Nome completo"
 style="display:none">
 
 <input
 id="email"
-class="input"
+class="campo"
 placeholder="E-mail ou telefone">
 
 <input
 id="senha"
-class="input"
+class="campo"
 type="password"
 placeholder="Palavra-passe">
 
 <button
-class="btn primary continue"
-onclick="enviar()">
+class="botao botao-principal continuar"
+onclick="continuar()">
 Continuar
 </button>
 
-<div id="mensagem" class="message"></div>
+<div
+class="mensagem"
+id="mensagem">
+</div>
 
 </div>
+
 </div>
 
 
@@ -618,50 +546,21 @@ Continuar
 let tipo="login";
 
 
-function abrir(opcao){
+function abrirLogin(){
+
+tipo="login";
 
 document.getElementById("modal")
-.classList.add("show");
-
-modo(opcao);
-
-}
-
-
-function fechar(){
-
-document.getElementById("modal")
-.classList.remove("show");
-
-}
-
-
-function modo(opcao){
-
-tipo=opcao;
-
-let registo=opcao==="registo";
+.classList.add("ativo");
 
 document.getElementById("titulo")
-.textContent=registo
-?"Criar conta no Conecta+"
-:"Entrar no Conecta+";
+.textContent="Entrar no Conecta+";
 
 document.getElementById("descricao")
-.textContent=registo
-?"Crie a sua conta para começar."
-:"Aceda à sua conta para continuar.";
+.textContent="Aceda à sua conta para continuar.";
 
 document.getElementById("nome")
-.style.display=registo
-?"block"
-:"none";
-
-document.getElementById("tabLogin")
-.classList.toggle("active",!registo);
-
-document.getElementById("tabRegisto")
-.classList.toggle("active",registo);
+.style.display="none";
 
 document.getElementById("mensagem")
 .textContent="";
@@ -669,64 +568,66 @@ document.getElementById("mensagem")
 }
 
 
-function enviar(){
+function abrirRegisto(){
 
-let email=
-document.getElementById("email")
-.value.trim();
+tipo="registo";
 
-let senha=
-document.getElementById("senha")
-.value.trim();
+document.getElementById("modal")
+.classList.add("ativo");
 
-let nome=
+document.getElementById("titulo")
+.textContent="Criar conta no Conecta+";
+
+document.getElementById("descricao")
+.textContent="Crie a sua conta para começar.";
+
 document.getElementById("nome")
-.value.trim();
-
-
-if(tipo==="registo" && !nome){
+.style.display="block";
 
 document.getElementById("mensagem")
-.textContent="Digite o seu nome.";
-
-return;
+.textContent="";
 
 }
 
 
-if(!email || !senha){
+function fechar(){
 
-document.getElementById("mensagem")
-.textContent="Preencha os campos.";
-
-return;
+document.getElementById("modal")
+.classList.remove("ativo");
 
 }
 
+
+function continuar(){
+
+let email=document.getElementById("email").value;
+let senha=document.getElementById("senha").value;
+let nome=document.getElementById("nome").value;
+
+if(tipo==="registo" && nome===""){
+document.getElementById("mensagem").textContent=
+"Digite o seu nome.";
+return;
+}
+
+if(email==="" || senha===""){
+document.getElementById("mensagem").textContent=
+"Preencha os campos.";
+return;
+}
 
 if(tipo==="registo"){
-
-localStorage.setItem(
-"conecta_nome",
-nome
-);
-
-document.getElementById("mensagem")
-.textContent=
+document.getElementById("mensagem").textContent=
 "Conta de demonstração criada!";
-
 }else{
-
-document.getElementById("mensagem")
-.textContent=
+document.getElementById("mensagem").textContent=
 "Entrada de demonstração realizada!";
-
 }
 
 }
 
 
-function demo(nome){
+function mostrar(nome){
 
 alert(
 nome+
