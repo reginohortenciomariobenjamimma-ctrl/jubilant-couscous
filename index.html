@@ -3,212 +3,252 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Conecta+</title>
 
 <style>
-*{
-    box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 html,body{
-    margin:0;
-    padding:0;
-    min-height:100%;
+margin:0;
+padding:0;
+min-height:100%;
 }
 
 body{
-    font-family:Arial,sans-serif;
-    background:#06142f;
-    color:white;
+font-family:Arial,sans-serif;
+background:#06142f;
+color:white;
 }
 
 header{
-    padding:18px;
-    background:#081d3d;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid #24466d;
+padding:18px;
+background:#081d3d;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:1px solid #24466d;
 }
 
 .logo{
-    font-size:24px;
-    font-weight:bold;
-    color:#00d9ff;
+font-size:24px;
+font-weight:bold;
+color:#00d9ff;
 }
 
 .online{
-    color:#42e879;
-    font-size:14px;
+color:#42e879;
+font-size:14px;
 }
 
 main{
-    width:100%;
-    max-width:700px;
-    margin:auto;
-    padding:25px 15px;
+width:100%;
+max-width:700px;
+margin:auto;
+padding:25px 15px;
 }
 
 h1{
-    text-align:center;
-    color:#00d9ff;
-    font-size:30px;
+text-align:center;
+color:#00d9ff;
+font-size:30px;
 }
 
 .intro{
-    text-align:center;
-    color:#b8c8dc;
-    line-height:1.5;
+text-align:center;
+color:#b8c8dc;
+line-height:1.5;
+}
+
+.auth{
+background:#0b2144;
+border:1px solid #244d78;
+border-radius:18px;
+padding:20px;
+margin-top:20px;
+}
+
+.auth h2{
+margin-top:0;
+text-align:center;
+color:#00d9ff;
+}
+
+.auth input{
+width:100%;
+margin:6px 0;
+padding:14px;
+border:0;
+outline:0;
+border-radius:25px;
+background:#173456;
+color:white;
+font-size:15px;
+}
+
+.auth input::placeholder{
+color:#9eb0c7;
+}
+
+.auth button{
+width:100%;
+margin-top:8px;
+padding:13px;
+border:0;
+border-radius:25px;
+background:#00aee8;
+color:white;
+font-weight:bold;
+}
+
+.auth .secondary{
+background:#173961;
+}
+
+.userbar{
+display:none;
+background:#102c53;
+border-radius:15px;
+padding:15px;
+margin-top:20px;
+text-align:center;
+}
+
+.userbar button{
+margin-top:10px;
+padding:10px 20px;
+border:0;
+border-radius:20px;
+background:#d9534f;
+color:white;
 }
 
 .chat{
-    margin-top:25px;
-    background:#0b2144;
-    border:1px solid #244d78;
-    border-radius:18px;
-    overflow:hidden;
+display:none;
+margin-top:25px;
+background:#0b2144;
+border:1px solid #244d78;
+border-radius:18px;
+overflow:hidden;
 }
 
 .chat-title{
-    padding:16px;
-    font-weight:bold;
-    background:#102c53;
-}
-
-.messages{
-    height:350px;
-    overflow-y:auto;
-    padding:15px;
-}
-
-.message{
-    margin:12px 0;
-}
-
-.name{
-    font-size:12px;
-    color:#8fa8c5;
-    margin-bottom:5px;
-}
-
-.bubble{
-    display:inline-block;
-    padding:12px 15px;
-    background:#173961;
-    border-radius:15px;
-    max-width:80%;
-    word-wrap:break-word;
-}
-
-.mine{
-    text-align:right;
-}
-
-.mine .bubble{
-    background:#087fb9;
-}
-
-.area{
-    display:flex;
-    gap:8px;
-    padding:12px;
-    background:#081d3d;
-}
-
-input{
-    flex:1;
-    min-width:0;
-    padding:14px;
-    border:0;
-    outline:0;
-    border-radius:25px;
-    background:#173456;
-    color:white;
-    font-size:15px;
-}
-
-input::placeholder{
-    color:#9eb0c7;
-}
-
-button{
-    border:0;
-    padding:12px 20px;
-    border-radius:25px;
-    background:#00aee8;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-button:active{
-    transform:scale(0.96);
-}
-
-button:disabled{
-    opacity:0.6;
+padding:16px;
+font-weight:bold;
+background:#102c53;
 }
 
 .status{
-    text-align:center;
-    padding:8px;
-    color:#8fa8c5;
-    font-size:12px;
+text-align:center;
+padding:8px;
+color:#8fa8c5;
+font-size:12px;
+}
+
+.messages{
+height:350px;
+overflow-y:auto;
+padding:15px;
+}
+
+.message{
+margin:12px 0;
+}
+
+.name{
+font-size:12px;
+color:#8fa8c5;
+margin-bottom:5px;
+}
+
+.bubble{
+display:inline-block;
+padding:12px 15px;
+background:#173961;
+border-radius:15px;
+max-width:80%;
+word-wrap:break-word;
+}
+
+.mine{
+text-align:right;
+}
+
+.mine .bubble{
+background:#087fb9;
+}
+
+.area{
+display:flex;
+gap:8px;
+padding:12px;
+background:#081d3d;
+}
+
+.area input{
+flex:1;
+min-width:0;
+padding:14px;
+border:0;
+outline:0;
+border-radius:25px;
+background:#173456;
+color:white;
+font-size:15px;
+}
+
+.area button{
+border:0;
+padding:12px 20px;
+border-radius:25px;
+background:#00aee8;
+color:white;
+font-weight:bold;
 }
 
 .cards{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-    margin-top:20px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+margin-top:20px;
 }
 
 .card{
-    background:#0b2144;
-    border:1px solid #244d78;
-    border-radius:15px;
-    padding:20px;
-    text-align:center;
+background:#0b2144;
+border:1px solid #244d78;
+border-radius:15px;
+padding:20px;
+text-align:center;
 }
 
 .card div{
-    font-size:28px;
-    margin-bottom:8px;
+font-size:28px;
+margin-bottom:8px;
 }
 
 .card p{
-    color:#9eb0c7;
-    font-size:13px;
+color:#9eb0c7;
+font-size:13px;
 }
 
 footer{
-    text-align:center;
-    padding:30px;
-    color:#7188a8;
+text-align:center;
+padding:30px;
+color:#7188a8;
 }
 
 @media(max-width:500px){
 
-    .logo{
-        font-size:20px;
-    }
+.logo{
+font-size:20px;
+}
 
-    h1{
-        font-size:25px;
-    }
+h1{
+font-size:25px;
+}
 
-    .cards{
-        grid-template-columns:1fr;
-    }
-
-    .area{
-        padding:10px;
-    }
-
-    button{
-        padding:12px 16px;
-    }
+.cards{
+grid-template-columns:1fr;
+}
 }
 </style>
 </head>
@@ -216,96 +256,136 @@ footer{
 <body>
 
 <header>
-
-    <div class="logo">
-        💬 Conecta+
-    </div>
-
-    <div class="online">
-        ● Online
-    </div>
-
+<div class="logo">💬 Conecta+</div>
+<div class="online">● Online</div>
 </header>
 
 <main>
 
-    <h1>
-        Bem-vindo à Conecta+
-    </h1>
+<h1>Bem-vindo à Conecta+</h1>
 
-    <p class="intro">
-        Converse, faça chamadas e conecte-se com outras pessoas.
-    </p>
+<p class="intro">
+Converse e conecte-se com outras pessoas.
+</p>
 
-    <div class="chat">
 
-        <div class="chat-title">
-            💬 Conversas
-        </div>
+<!-- AUTENTICAÇÃO -->
 
-        <div class="status" id="status">
-            A ligar às mensagens...
-        </div>
+<div class="auth" id="auth">
 
-        <div class="messages" id="messages"></div>
+<h2 id="authTitulo">Criar conta</h2>
 
-        <div class="area">
+<input
+id="nome"
+type="text"
+placeholder="Seu nome"
+>
 
-            <input
-                id="texto"
-                type="text"
-                placeholder="Escreva uma mensagem..."
-                autocomplete="off"
-            >
+<input
+id="email"
+type="email"
+placeholder="Seu e-mail"
+>
 
-            <button id="btnEnviar">
-                Enviar
-            </button>
+<input
+id="senha"
+type="password"
+placeholder="Sua palavra-passe"
+>
 
-        </div>
+<button id="btnCriar">
+Criar conta
+</button>
 
-    </div>
+<button class="secondary" id="btnModo">
+Já tenho uma conta
+</button>
 
-    <div class="cards">
+<p
+id="authMensagem"
+style="text-align:center;color:#ffcc66;font-size:13px;"
+></p>
 
-        <div class="card">
-            <div>💬</div>
-            <strong>Mensagens</strong>
-            <p>
-                Converse com seus contactos.
-            </p>
-        </div>
+</div>
 
-        <div class="card">
-            <div>📞</div>
-            <strong>Chamadas</strong>
-            <p>
-                Faça chamadas de voz.
-            </p>
-        </div>
 
-        <div class="card">
-            <div>📹</div>
-            <strong>Vídeos</strong>
-            <p>
-                Faça videochamadas.
-            </p>
-        </div>
+<!-- UTILIZADOR -->
 
-        <div class="card">
-            <div>👥</div>
-            <strong>Grupos</strong>
-            <p>
-                Converse em grupo.
-            </p>
-        </div>
+<div class="userbar" id="userbar">
 
-    </div>
+<div id="usuarioAtual"></div>
+
+<button id="btnSair">
+Sair
+</button>
+
+</div>
+
+
+<!-- CHAT -->
+
+<div class="chat" id="chat">
+
+<div class="chat-title">
+💬 Conversas
+</div>
+
+<div class="status" id="status">
+A ligar às mensagens...
+</div>
+
+<div class="messages" id="messages"></div>
+
+<div class="area">
+
+<input
+id="texto"
+type="text"
+placeholder="Escreva uma mensagem..."
+autocomplete="off"
+>
+
+<button id="btnEnviar">
+Enviar
+</button>
+
+</div>
+
+</div>
+
+
+<div class="cards">
+
+<div class="card">
+<div>💬</div>
+<strong>Mensagens</strong>
+<p>Converse com seus contactos.</p>
+</div>
+
+<div class="card">
+<div>📞</div>
+<strong>Chamadas</strong>
+<p>Faça chamadas de voz.</p>
+</div>
+
+<div class="card">
+<div>📹</div>
+<strong>Vídeos</strong>
+<p>Faça videochamadas.</p>
+</div>
+
+<div class="card">
+<div>👥</div>
+<strong>Grupos</strong>
+<p>Converse em grupo.</p>
+</div>
+
+</div>
 
 </main>
 
 <footer>
-    © 2026 Conecta+ — Todos os direitos reservados.
+© 2026 Conecta+ — Todos os direitos reservados.
 </footer>
 
 
@@ -313,169 +393,420 @@ footer{
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
 
 <script>
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBAfIlTpRCeisAmEOiRYsTJ3Ie0FeWEkzE",
-    authDomain: "conecta-6133c.firebaseapp.com",
-    projectId: "conecta-6133c",
-    storageBucket: "conecta-6133c.firebasestorage.app",
-    messagingSenderId: "48961157088",
-    appId: "1:48961157088:web:d0fd22fdc8760e3c459d85",
-    measurementId: "G-MEKCSRXVM9"
+
+apiKey:"AIzaSyBAfIlTpRCeisAmEOiRYsTJ3Ie0FeWEkzE",
+
+authDomain:"conecta-6133c.firebaseapp.com",
+
+projectId:"conecta-6133c",
+
+storageBucket:"conecta-6133c.firebasestorage.app",
+
+messagingSenderId:"48961157088",
+
+appId:"1:48961157088:web:d0fd22fdc8760e3c459d85",
+
+measurementId:"G-MEKCSRXVM9"
+
 };
 
 
 firebase.initializeApp(firebaseConfig);
 
-const db = firebase.firestore();
+const auth=firebase.auth();
+
+const db=firebase.firestore();
 
 
-const campo = document.getElementById("texto");
+const authBox=document.getElementById("auth");
 
-const botao = document.getElementById("btnEnviar");
+const authTitulo=document.getElementById("authTitulo");
 
-const mensagens = document.getElementById("messages");
+const nome=document.getElementById("nome");
 
-const status = document.getElementById("status");
+const email=document.getElementById("email");
 
+const senha=document.getElementById("senha");
 
-/* CARREGAR MENSAGENS */
+const btnCriar=document.getElementById("btnCriar");
 
-db.collection("mensagens")
-.orderBy("data", "asc")
-.onSnapshot(
+const btnModo=document.getElementById("btnModo");
 
-    function(snapshot){
+const authMensagem=document.getElementById("authMensagem");
 
-        mensagens.innerHTML = "";
+const userbar=document.getElementById("userbar");
 
-        snapshot.forEach(function(doc){
+const usuarioAtual=document.getElementById("usuarioAtual");
 
-            const dados = doc.data();
+const btnSair=document.getElementById("btnSair");
 
-            const div = document.createElement("div");
+const chat=document.getElementById("chat");
 
-            div.className = "message";
+const messages=document.getElementById("messages");
 
-            if(dados.autor === "Você"){
-                div.className = "message mine";
-            }
+const texto=document.getElementById("texto");
 
-            const nome = document.createElement("div");
+const btnEnviar=document.getElementById("btnEnviar");
 
-            nome.className = "name";
-
-            nome.textContent = dados.autor || "Utilizador";
-
-            const bolha = document.createElement("div");
-
-            bolha.className = "bubble";
-
-            bolha.textContent = dados.texto || "";
-
-            div.appendChild(nome);
-
-            div.appendChild(bolha);
-
-            mensagens.appendChild(div);
-
-        });
-
-        mensagens.scrollTop = mensagens.scrollHeight;
-
-        status.textContent = "🟢 Mensagens online";
-
-    },
-
-    function(error){
-
-        console.error(error);
-
-        status.textContent =
-            "⚠️ Não foi possível ligar ao Firestore.";
-
-    }
-
-);
+const status=document.getElementById("status");
 
 
-/* ENVIAR MENSAGEM */
+let modoCriar=true;
 
-async function enviar(){
 
-    const texto = campo.value.trim();
+/* ALTERNAR CRIAR / ENTRAR */
 
-    if(texto === ""){
-        return;
-    }
+btnModo.addEventListener("click",function(){
 
-    botao.disabled = true;
+modoCriar=!modoCriar;
 
-    try{
+authMensagem.textContent="";
 
-        await db.collection("mensagens").add({
+if(modoCriar){
 
-            autor: "Você",
+authTitulo.textContent="Criar conta";
 
-            texto: texto,
+nome.style.display="block";
 
-            data: firebase.firestore.FieldValue.serverTimestamp()
+btnCriar.textContent="Criar conta";
 
-        });
+btnModo.textContent="Já tenho uma conta";
 
-        campo.value = "";
+}else{
 
-        campo.focus();
+authTitulo.textContent="Entrar";
 
-    }
+nome.style.display="none";
 
-    catch(error){
+btnCriar.textContent="Entrar";
 
-        console.error(error);
+btnModo.textContent="Criar nova conta";
 
-        alert(
-            "Não foi possível enviar a mensagem. Verifique a ligação ao Firestore."
-        );
+}
 
-    }
+});
 
-    finally{
 
-        botao.disabled = false;
+/* CRIAR OU ENTRAR */
 
-    }
+btnCriar.addEventListener("click",async function(){
+
+const mail=email.value.trim();
+
+const pass=senha.value.trim();
+
+const nomeUsuario=nome.value.trim();
+
+authMensagem.textContent="";
+
+
+if(mail==="" || pass===""){
+
+authMensagem.textContent=
+"Preencha o e-mail e a palavra-passe.";
+
+return;
 
 }
 
 
-/* BOTÃO ENVIAR */
+if(pass.length<6){
 
-botao.addEventListener(
-    "click",
-    enviar
+authMensagem.textContent=
+"A palavra-passe deve ter pelo menos 6 caracteres.";
+
+return;
+
+}
+
+
+try{
+
+if(modoCriar){
+
+if(nomeUsuario===""){
+
+authMensagem.textContent=
+"Digite o seu nome.";
+
+return;
+
+}
+
+
+const resultado=
+await auth.createUserWithEmailAndPassword(
+mail,
+pass
 );
 
 
-/* ENTER */
+await db.collection("usuarios")
+.doc(resultado.user.uid)
+.set({
 
-campo.addEventListener(
-    "keydown",
-    function(event){
+nome:nomeUsuario,
 
-        if(event.key === "Enter"){
+email:mail,
 
-            event.preventDefault();
+criadoEm:
+firebase.firestore.FieldValue.serverTimestamp()
 
-            enviar();
+});
 
-        }
 
-    }
+authMensagem.textContent=
+"Conta criada com sucesso!";
+
+}else{
+
+await auth.signInWithEmailAndPassword(
+mail,
+pass
 );
+
+}
+
+}catch(error){
+
+console.error(error);
+
+authMensagem.textContent=
+"Erro: "+error.message;
+
+}
+
+});
+
+
+/* OBSERVAR LOGIN */
+
+auth.onAuthStateChanged(async function(user){
+
+if(user){
+
+authBox.style.display="none";
+
+userbar.style.display="block";
+
+chat.style.display="block";
+
+
+let nomeExibido="Utilizador";
+
+
+try{
+
+const doc=
+await db.collection("usuarios")
+.doc(user.uid)
+.get();
+
+
+if(doc.exists && doc.data().nome){
+
+nomeExibido=doc.data().nome;
+
+}
+
+}catch(error){
+
+console.error(error);
+
+}
+
+
+usuarioAtual.textContent=
+"👤 Olá, "+nomeExibido+"!";
+
+
+carregarMensagens();
+
+}else{
+
+authBox.style.display="block";
+
+userbar.style.display="none";
+
+chat.style.display="none";
+
+}
+
+});
+
+
+/* SAIR */
+
+btnSair.addEventListener("click",function(){
+
+auth.signOut();
+
+});
+
+
+/* CARREGAR MENSAGENS */
+
+function carregarMensagens(){
+
+db.collection("mensagens")
+.orderBy("data","asc")
+.onSnapshot(function(snapshot){
+
+messages.innerHTML="";
+
+snapshot.forEach(function(doc){
+
+const dados=doc.data();
+
+const div=document.createElement("div");
+
+div.className="message";
+
+if(auth.currentUser &&
+dados.uid===auth.currentUser.uid){
+
+div.className="message mine";
+
+}
+
+const nomeDiv=document.createElement("div");
+
+nomeDiv.className="name";
+
+nomeDiv.textContent=dados.autor || "Utilizador";
+
+
+const bolha=document.createElement("div");
+
+bolha.className="bubble";
+
+bolha.textContent=dados.texto || "";
+
+
+div.appendChild(nomeDiv);
+
+div.appendChild(bolha);
+
+messages.appendChild(div);
+
+});
+
+
+messages.scrollTop=messages.scrollHeight;
+
+status.textContent="🟢 Mensagens online";
+
+},function(error){
+
+console.error(error);
+
+status.textContent=
+"⚠️ Erro nas mensagens.";
+
+});
+
+}
+
+
+/* ENVIAR */
+
+async function enviar(){
+
+const user=auth.currentUser;
+
+const mensagem=texto.value.trim();
+
+
+if(!user || mensagem===""){
+
+return;
+
+}
+
+
+btnEnviar.disabled=true;
+
+
+try{
+
+const docUsuario=
+await db.collection("usuarios")
+.doc(user.uid)
+.get();
+
+
+let nomeUsuario="Utilizador";
+
+
+if(docUsuario.exists && docUsuario.data().nome){
+
+nomeUsuario=docUsuario.data().nome;
+
+}
+
+
+await db.collection("mensagens").add({
+
+uid:user.uid,
+
+autor:nomeUsuario,
+
+texto:mensagem,
+
+data:
+firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+
+texto.value="";
+
+texto.focus();
+
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"Não foi possível enviar a mensagem."
+);
+
+}
+
+
+btnEnviar.disabled=false;
+
+}
+
+
+btnEnviar.addEventListener(
+"click",
+enviar
+);
+
+
+texto.addEventListener(
+"keydown",
+function(event){
+
+if(event.key==="Enter"){
+
+event.preventDefault();
+
+enviar();
+
+}
+
+});
 
 </script>
 
