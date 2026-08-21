@@ -20,7 +20,7 @@ html,body{
 body{
     font-family:Arial,sans-serif;
     background:#06142f;
-    color:#ffffff;
+    color:white;
 }
 
 header{
@@ -146,6 +146,17 @@ button:active{
     transform:scale(0.96);
 }
 
+button:disabled{
+    opacity:0.6;
+}
+
+.status{
+    text-align:center;
+    padding:8px;
+    color:#8fa8c5;
+    font-size:12px;
+}
+
 .cards{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -232,33 +243,11 @@ footer{
             💬 Conversas
         </div>
 
-        <div class="messages" id="messages">
-
-            <div class="message">
-
-                <div class="name">
-                    Conecta+
-                </div>
-
-                <div class="bubble">
-                    Olá! 👋 Bem-vindo à Conecta+.
-                </div>
-
-            </div>
-
-            <div class="message">
-
-                <div class="name">
-                    Sistema
-                </div>
-
-                <div class="bubble">
-                    Escreva uma mensagem para testar.
-                </div>
-
-            </div>
-
+        <div class="status" id="status">
+            A ligar às mensagens...
         </div>
+
+        <div class="messages" id="messages"></div>
 
         <div class="area">
 
@@ -319,11 +308,104 @@ footer{
     © 2026 Conecta+ — Todos os direitos reservados.
 </footer>
 
+
+<!-- FIREBASE -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+
 <script>
 
-function enviar(){
+const firebaseConfig = {
+    apiKey: "AIzaSyBAfIlTpRCeisAmEOiRYsTJ3Ie0FeWEkzE",
+    authDomain: "conecta-6133c.firebaseapp.com",
+    projectId: "conecta-6133c",
+    storageBucket: "conecta-6133c.firebasestorage.app",
+    messagingSenderId: "48961157088",
+    appId: "1:48961157088:web:d0fd22fdc8760e3c459d85",
+    measurementId: "G-MEKCSRXVM9"
+};
 
-    const campo = document.getElementById("texto");
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.firestore();
+
+
+const campo = document.getElementById("texto");
+
+const botao = document.getElementById("btnEnviar");
+
+const mensagens = document.getElementById("messages");
+
+const status = document.getElementById("status");
+
+
+/* CARREGAR MENSAGENS */
+
+db.collection("mensagens")
+.orderBy("data", "asc")
+.onSnapshot(
+
+    function(snapshot){
+
+        mensagens.innerHTML = "";
+
+        snapshot.forEach(function(doc){
+
+            const dados = doc.data();
+
+            const div = document.createElement("div");
+
+            div.className = "message";
+
+            if(dados.autor === "Você"){
+                div.className = "message mine";
+            }
+
+            const nome = document.createElement("div");
+
+            nome.className = "name";
+
+            nome.textContent = dados.autor || "Utilizador";
+
+            const bolha = document.createElement("div");
+
+            bolha.className = "bubble";
+
+            bolha.textContent = dados.texto || "";
+
+            div.appendChild(nome);
+
+            div.appendChild(bolha);
+
+            mensagens.appendChild(div);
+
+        });
+
+        mensagens.scrollTop = mensagens.scrollHeight;
+
+        status.textContent = "🟢 Mensagens online";
+
+    },
+
+    function(error){
+
+        console.error(error);
+
+        status.textContent =
+            "⚠️ Não foi possível ligar ao Firestore.";
+
+    }
+
+);
+
+
+/* ENVIAR MENSAGEM */
+
+async function enviar(){
 
     const texto = campo.value.trim();
 
@@ -331,48 +413,69 @@ function enviar(){
         return;
     }
 
-    const mensagens = document.getElementById("messages");
+    botao.disabled = true;
 
-    const div = document.createElement("div");
+    try{
 
-    div.className = "message mine";
+        await db.collection("mensagens").add({
 
-    const nome = document.createElement("div");
+            autor: "Você",
 
-    nome.className = "name";
+            texto: texto,
 
-    nome.textContent = "Você";
+            data: firebase.firestore.FieldValue.serverTimestamp()
 
-    const bolha = document.createElement("div");
+        });
 
-    bolha.className = "bubble";
+        campo.value = "";
 
-    bolha.textContent = texto;
+        campo.focus();
 
-    div.appendChild(nome);
-
-    div.appendChild(bolha);
-
-    mensagens.appendChild(div);
-
-    campo.value = "";
-
-    mensagens.scrollTop = mensagens.scrollHeight;
-}
-
-document
-.getElementById("btnEnviar")
-.addEventListener("click", enviar);
-
-document
-.getElementById("texto")
-.addEventListener("keydown", function(event){
-
-    if(event.key === "Enter"){
-        enviar();
     }
 
-});
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "Não foi possível enviar a mensagem. Verifique a ligação ao Firestore."
+        );
+
+    }
+
+    finally{
+
+        botao.disabled = false;
+
+    }
+
+}
+
+
+/* BOTÃO ENVIAR */
+
+botao.addEventListener(
+    "click",
+    enviar
+);
+
+
+/* ENTER */
+
+campo.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Enter"){
+
+            event.preventDefault();
+
+            enviar();
+
+        }
+
+    }
+);
 
 </script>
 
