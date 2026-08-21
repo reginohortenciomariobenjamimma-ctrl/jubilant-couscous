@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#06142f">
+  <title>Conecta+ — Converse, Ligue, Veja, Conecte-se</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #020817;
+      color: white;
+      min-height: 100vh;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .app {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 10% 15%, rgba(0,212,255,.20), transparent 28%),
+        radial-gradient(circle at 90% 25%, rgba(80,255,0,.12), transparent 25%),
+        linear-gradient(145deg, #020817, #071b3b 55%, #020817);
+    }
+
+    header {
+      height: 72px;
+      padding: 0 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(2,8,23,.78);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 25px;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg,#00d4ff,#087cff 55%,#29ef52);
+      box-shadow: 0 0 25px rgba(0,212,255,.28);
+      font-size: 22px;
+    }
+
+    .brand span {
+      background: linear-gradient(90deg,#fff 65%,#29ef52);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .header-btn {
+      background: transparent;
+      color: white;
+      border: 1px solid rgba(255,255,255,.2);
+      padding: 9px 15px;
+      border-radius: 22px;
+    }
+
+    .hero {
+      max-width: 1150px;
+      margin: auto;
+      padding: 55px 20px 35px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px,8vw,78px);
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .hero h1 b {
+      color: #19eaff;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: #31ed49;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #b9c7df;
+      margin: 18px auto 28px;
+      max-width: 650px;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .primary,
+    .secondary {
+      border: 0;
+      border-radius: 28px;
+      padding: 14px 27px;
+      font-weight: 800;
+    }
+
+    .primary {
+      color: white;
+      background: linear-gradient(90deg,#087cff,#18d7ff,#29e94d);
+      box-shadow: 0 10px 30px rgba(0,180,255,.2);
+    }
+
+    .secondary {
+      color: white;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.16);
+    }
+
+    .phone {
+      width: min(390px,92vw);
+      margin: 35px auto 0;
+      padding: 12px;
+      border-radius: 42px;
+      background: #05080f;
+      border: 2px solid #263044;
+      box-shadow: 0 25px 80px rgba(0,0,0,.6);
+    }
+
+    .screen {
+      border-radius: 31px;
+      overflow: hidden;
+      background: #071326;
+      min-height: 690px;
+    }
+
+    .phone-top {
+      height: 48px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      color: #aebbd1;
+      font-size: 13px;
+    }
+
+    .screen-head {
+      padding: 7px 18px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .screen-brand {
+      font-weight: 900;
+      font-size: 23px;
+    }
+
+    .screen-brand span {
+      color: #20eaff;
+    }
+
+    .screen-brand b {
+      color: #35ef4e;
+    }
+
+    .icons {
+      display: flex;
+      gap: 12px;
+      color: #cbd6e9;
+      font-size: 22px;
+    }
+
+    .search {
+      margin: 0 15px 18px;
+      padding: 13px 15px;
+      border-radius: 18px;
+      background: #14223a;
+      color: #8393ac;
+      text-align: left;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 18px 10px;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .chat {
+      margin: 7px 12px;
+      padding: 12px;
+      border-radius: 18px;
+      background: rgba(24,39,64,.75);
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      text-align: left;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      background: linear-gradient(135deg,#18b9ff,#7c3cff);
+      position: relative;
+    }
+
+    .avatar:after {
+      content: "";
+      width: 11px;
+      height: 11px;
+      background: #29ef52;
+      border: 2px solid #071326;
+      border-radius: 50%;
+      position: absolute;
+      right: 0;
+      bottom: 1px;
+    }
+
+    .chat-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .chat-info strong {
+      display: block;
+    }
+
+    .chat-info small {
+      display: block;
+      color: #94a4bd;
+      margin-top: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .badge {
+      min-width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #087cff;
+      font-size: 12px;
+    }
+
+    .bottom {
+      margin-top: 15px;
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      padding: 13px 5px 10px;
+      background: #0b172a;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+
+    .nav {
+      border: 0;
+      background: transparent;
+      color: #8796ae;
+      font-size: 11px;
+    }
+
+    .nav.active {
+      color: #16dfff;
+    }
+
+    .nav div {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .features {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 25px 20px 70px;
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 14px;
+    }
+
+    .feature {
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.035);
+      border-radius: 20px;
+      text-align: center;
+    }
+
+    .feature .ficon {
+      font-size: 30px;
+      margin-bottom: 9px;
+    }
+
+    .feature h3 {
+      font-size: 15px;
+    }
+
+    .feature p {
+      font-size: 12px;
+      color: #8fa0b9;
+      margin-top: 5px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.72);
+      z-index: 50;
+      padding: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .box {
+      width: min(410px,100%);
+      background: #0b172a;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 25px;
+      padding: 26px;
+      box-shadow: 0 25px 80px #000;
+    }
+
+    .box h2 {
+      margin-bottom: 8px;
+    }
+
+    .box p {
+      color: #92a3bc;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 17px;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid #26354c;
+      background: #111f34;
+      color: #aebbd1;
+    }
+
+    .tab.active {
+      background: #087cff;
+      color: white;
+    }
+
+    .field {
+      width: 100%;
+      padding: 13px;
+      margin: 7px 0;
+      border-radius: 13px;
+      border: 1px solid #2b3a53;
+      background: #071326;
+      color: white;
+      outline: none;
+    }
+
+    .close {
+      float: right;
+      border: 0;
+      background: transparent;
+      color: #9caec7;
+      font-size: 24px;
+    }
+
+    .message {
+      min-height: 22px;
+      color: #29ef52;
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    footer {
+      text-align: center;
+      color: #667993;
+      padding: 0 20px 25px;
+      font-size: 12px;
+    }
+
+    @media(max-width:700px) {
+      .features {
+        grid-template-columns: repeat(2,1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <header>
+    <div class="brand">
+      <div class="brand-mark">💬</div>
+      <span>Conecta+</span>
+    </div>
+
+    <button class="header-btn" onclick="openAuth('login')">
+      Entrar
+    </button>
+  </header>
+
+  <main>
+
+    <section class="hero">
+
+      <h1>
+        Converse <b>•</b>
+        Ligue <b>•</b>
+        Veja <em>•</em>
+        Conecte-se
+      </h1>
+
+      <p>
+        Mais que um app, é conexão de verdade.
+        Converse com pessoas, faça chamadas de voz
+        e videochamadas.
+      </p>
+
+      <div class="hero-actions">
+
+        <button class="primary" onclick="openAuth('login')">
+          Entrar
+        </button>
+
+        <button class="secondary" onclick="openAuth('register')">
+          Criar conta
+        </button>
+
+      </div>
+
+      <div class="phone">
+
+        <div class="screen">
+
+          <div class="phone-top">
+            <span>9:41</span>
+            <span>● ◔ ▮</span>
+          </div>
+
+          <div class="screen-head">
+
+            <div class="screen-brand">
+              Conecta<span>+</span>
+            </div>
+
+            <div class="icons">
+              ⌕ ⋮
+            </div>
+
+          </div>
+
+          <div class="search">
+            🔎 &nbsp; Pesquisar pessoas ou grupos
+          </div>
+
+          <div class="section-title">
+            <span>Conversas</span>
+            <span>☰</span>
+          </div>
+
+          <div class="chat">
+            <div class="avatar">👨🏾</div>
+
+            <div class="chat-info">
+              <strong>João Carlos</strong>
+              <small>Olá, tudo bem?</small>
+            </div>
+
+            <div class="badge">2</div>
+          </div>
+
+          <div class="chat">
+            <div class="avatar">👩🏾</div>
+
+            <div class="chat-info">
+              <strong>Maria Beatriz</strong>
+              <small>Vamos fazer uma chamada?</small>
+            </div>
+
+            <div class="badge">1</div>
+          </div>
+
+          <div class="chat">
+            <div class="avatar">👥</div>
+
+            <div class="chat-info">
+              <strong>Grupo Família ❤️</strong>
+              <small>Mãe: Almoço domingo!</small>
+            </div>
+
+            <div class="badge">5</div>
+          </div>
+
+          <div class="chat">
+            <div class="avatar">👨🏾</div>
+
+            <div class="chat-info">
+              <strong>Paulo Maputo</strong>
+              <small>🎤 Mensagem de voz</small>
+            </div>
+          </div>
+
+          <div class="chat">
+            <div class="avatar">👩🏾</div>
+
+            <div class="chat-info">
+              <strong>Aninha</strong>
+              <small>Estou a caminho 😉</small>
+            </div>
+          </div>
+
+          <div class="bottom">
+
+            <button class="nav active" onclick="demo('Conversas')">
+              <div>💬</div>
+              Conversas
+            </button>
+
+            <button class="nav" onclick="demo('Chamadas')">
+              <div>📞</div>
+              Chamadas
+            </button>
+
+            <button class="nav" onclick="demo('Status')">
+              <div>
