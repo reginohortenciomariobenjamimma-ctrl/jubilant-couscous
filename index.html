@@ -237,18 +237,9 @@ color:#7188a8;
 }
 
 @media(max-width:500px){
-
-.logo{
-font-size:20px;
-}
-
-h1{
-font-size:25px;
-}
-
-.cards{
-grid-template-columns:1fr;
-}
+.logo{font-size:20px}
+h1{font-size:25px}
+.cards{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -268,61 +259,35 @@ grid-template-columns:1fr;
 Converse e conecte-se com outras pessoas.
 </p>
 
-
-<!-- AUTENTICAÇÃO -->
-
 <div class="auth" id="auth">
 
 <h2 id="authTitulo">Criar conta</h2>
 
-<input
-id="nome"
-type="text"
-placeholder="Seu nome"
->
+<input id="nome" type="text" placeholder="Seu nome">
 
-<input
-id="email"
-type="email"
-placeholder="Seu e-mail"
->
+<input id="email" type="email" placeholder="Seu e-mail">
 
-<input
-id="senha"
-type="password"
-placeholder="Sua palavra-passe"
->
+<input id="senha" type="password" placeholder="Sua palavra-passe">
 
-<button id="btnCriar">
-Criar conta
-</button>
+<button id="btnCriar">Criar conta</button>
 
 <button class="secondary" id="btnModo">
 Já tenho uma conta
 </button>
 
-<p
-id="authMensagem"
-style="text-align:center;color:#ffcc66;font-size:13px;"
-></p>
+<p id="authMensagem"
+style="text-align:center;color:#ffcc66;font-size:13px;">
+</p>
 
 </div>
-
-
-<!-- UTILIZADOR -->
 
 <div class="userbar" id="userbar">
 
 <div id="usuarioAtual"></div>
 
-<button id="btnSair">
-Sair
-</button>
+<button id="btnSair">Sair</button>
 
 </div>
-
-
-<!-- CHAT -->
 
 <div class="chat" id="chat">
 
@@ -345,14 +310,11 @@ placeholder="Escreva uma mensagem..."
 autocomplete="off"
 >
 
-<button id="btnEnviar">
-Enviar
-</button>
+<button id="btnEnviar">Enviar</button>
 
 </div>
 
 </div>
-
 
 <div class="cards">
 
@@ -388,125 +350,81 @@ Enviar
 © 2026 Conecta+ — Todos os direitos reservados.
 </footer>
 
-
-<!-- FIREBASE -->
-
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-
 
 <script>
 
 const firebaseConfig = {
-
 apiKey:"AIzaSyBAfIlTpRCeisAmEOiRYsTJ3Ie0FeWEkzE",
-
 authDomain:"conecta-6133c.firebaseapp.com",
-
 projectId:"conecta-6133c",
-
 storageBucket:"conecta-6133c.firebasestorage.app",
-
 messagingSenderId:"48961157088",
-
 appId:"1:48961157088:web:d0fd22fdc8760e3c459d85",
-
 measurementId:"G-MEKCSRXVM9"
-
 };
-
 
 firebase.initializeApp(firebaseConfig);
 
 const auth=firebase.auth();
-
 const db=firebase.firestore();
 
-
 const authBox=document.getElementById("auth");
-
 const authTitulo=document.getElementById("authTitulo");
-
 const nome=document.getElementById("nome");
-
 const email=document.getElementById("email");
-
 const senha=document.getElementById("senha");
-
 const btnCriar=document.getElementById("btnCriar");
-
 const btnModo=document.getElementById("btnModo");
-
 const authMensagem=document.getElementById("authMensagem");
-
 const userbar=document.getElementById("userbar");
-
 const usuarioAtual=document.getElementById("usuarioAtual");
-
 const btnSair=document.getElementById("btnSair");
-
 const chat=document.getElementById("chat");
-
 const messages=document.getElementById("messages");
-
 const texto=document.getElementById("texto");
-
 const btnEnviar=document.getElementById("btnEnviar");
-
 const status=document.getElementById("status");
 
-
 let modoCriar=true;
+let nomeDoUtilizador="";
 
-
-/* ALTERNAR CRIAR / ENTRAR */
+/* CRIAR / ENTRAR */
 
 btnModo.addEventListener("click",function(){
 
 modoCriar=!modoCriar;
-
 authMensagem.textContent="";
 
 if(modoCriar){
 
 authTitulo.textContent="Criar conta";
-
 nome.style.display="block";
-
 btnCriar.textContent="Criar conta";
-
 btnModo.textContent="Já tenho uma conta";
 
 }else{
 
 authTitulo.textContent="Entrar";
-
 nome.style.display="none";
-
 btnCriar.textContent="Entrar";
-
 btnModo.textContent="Criar nova conta";
 
 }
 
 });
 
-
-/* CRIAR OU ENTRAR */
+/* CRIAR CONTA OU ENTRAR */
 
 btnCriar.addEventListener("click",async function(){
 
 const mail=email.value.trim();
-
 const pass=senha.value.trim();
-
 const nomeUsuario=nome.value.trim();
 
 authMensagem.textContent="";
-
 
 if(mail==="" || pass===""){
 
@@ -517,7 +435,6 @@ return;
 
 }
 
-
 if(pass.length<6){
 
 authMensagem.textContent=
@@ -526,7 +443,6 @@ authMensagem.textContent=
 return;
 
 }
-
 
 try{
 
@@ -541,27 +457,33 @@ return;
 
 }
 
-
 const resultado=
 await auth.createUserWithEmailAndPassword(
 mail,
 pass
 );
 
+/* Guarda o nome no perfil Firebase */
+
+await resultado.user.updateProfile({
+displayName:nomeUsuario
+});
+
+/* Guarda também no Firestore */
 
 await db.collection("usuarios")
 .doc(resultado.user.uid)
 .set({
 
 nome:nomeUsuario,
-
 email:mail,
-
+uid:resultado.user.uid,
 criadoEm:
 firebase.firestore.FieldValue.serverTimestamp()
 
 });
 
+nomeDoUtilizador=nomeUsuario;
 
 authMensagem.textContent=
 "Conta criada com sucesso!";
@@ -586,22 +508,34 @@ authMensagem.textContent=
 
 });
 
-
-/* OBSERVAR LOGIN */
+/* LOGIN */
 
 auth.onAuthStateChanged(async function(user){
 
-if(user){
+if(!user){
+
+authBox.style.display="block";
+userbar.style.display="none";
+chat.style.display="none";
+return;
+
+}
 
 authBox.style.display="none";
-
 userbar.style.display="block";
-
 chat.style.display="block";
 
+let nomeExibido="";
 
-let nomeExibido="Utilizador";
+/* Primeiro tenta o displayName do Firebase */
 
+if(user.displayName){
+
+nomeExibido=user.displayName;
+
+}
+
+/* Depois procura no Firestore */
 
 try{
 
@@ -610,38 +544,40 @@ await db.collection("usuarios")
 .doc(user.uid)
 .get();
 
+if(doc.exists){
 
-if(doc.exists && doc.data().nome){
+const dados=doc.data();
 
-nomeExibido=doc.data().nome;
+if(dados.nome){
+
+nomeExibido=dados.nome;
+
+}
 
 }
 
 }catch(error){
 
-console.error(error);
+console.error("Erro ao procurar nome:",error);
 
 }
 
+/* Última opção */
+
+if(!nomeExibido){
+
+nomeExibido="Utilizador";
+
+}
+
+nomeDoUtilizador=nomeExibido;
 
 usuarioAtual.textContent=
 "👤 Olá, "+nomeExibido+"!";
 
-
 carregarMensagens();
 
-}else{
-
-authBox.style.display="block";
-
-userbar.style.display="none";
-
-chat.style.display="none";
-
-}
-
 });
-
 
 /* SAIR */
 
@@ -650,7 +586,6 @@ btnSair.addEventListener("click",function(){
 auth.signOut();
 
 });
-
 
 /* CARREGAR MENSAGENS */
 
@@ -668,12 +603,14 @@ const dados=doc.data();
 
 const div=document.createElement("div");
 
-div.className="message";
-
 if(auth.currentUser &&
 dados.uid===auth.currentUser.uid){
 
 div.className="message mine";
+
+}else{
+
+div.className="message";
 
 }
 
@@ -681,28 +618,28 @@ const nomeDiv=document.createElement("div");
 
 nomeDiv.className="name";
 
-nomeDiv.textContent=dados.autor || "Utilizador";
-
+nomeDiv.textContent=
+dados.autor || "Utilizador";
 
 const bolha=document.createElement("div");
 
 bolha.className="bubble";
 
-bolha.textContent=dados.texto || "";
-
+bolha.textContent=
+dados.texto || "";
 
 div.appendChild(nomeDiv);
-
 div.appendChild(bolha);
 
 messages.appendChild(div);
 
 });
 
+messages.scrollTop=
+messages.scrollHeight;
 
-messages.scrollTop=messages.scrollHeight;
-
-status.textContent="🟢 Mensagens online";
+status.textContent=
+"🟢 Mensagens online";
 
 },function(error){
 
@@ -715,43 +652,50 @@ status.textContent=
 
 }
 
-
-/* ENVIAR */
+/* ENVIAR MENSAGEM */
 
 async function enviar(){
 
 const user=auth.currentUser;
-
 const mensagem=texto.value.trim();
 
-
 if(!user || mensagem===""){
-
 return;
-
 }
-
 
 btnEnviar.disabled=true;
 
-
 try{
+
+let nomeUsuario=nomeDoUtilizador;
+
+/* Procura o nome novamente se necessário */
+
+if(!nomeUsuario){
 
 const docUsuario=
 await db.collection("usuarios")
 .doc(user.uid)
 .get();
 
+if(docUsuario.exists &&
+docUsuario.data().nome){
 
-let nomeUsuario="Utilizador";
-
-
-if(docUsuario.exists && docUsuario.data().nome){
-
-nomeUsuario=docUsuario.data().nome;
+nomeUsuario=
+docUsuario.data().nome;
 
 }
 
+}
+
+/* Última opção */
+
+if(!nomeUsuario){
+
+nomeUsuario=
+user.displayName || "Utilizador";
+
+}
 
 await db.collection("mensagens").add({
 
@@ -766,11 +710,8 @@ firebase.firestore.FieldValue.serverTimestamp()
 
 });
 
-
 texto.value="";
-
 texto.focus();
-
 
 }catch(error){
 
@@ -782,17 +723,14 @@ alert(
 
 }
 
-
 btnEnviar.disabled=false;
 
 }
-
 
 btnEnviar.addEventListener(
 "click",
 enviar
 );
-
 
 texto.addEventListener(
 "keydown",
