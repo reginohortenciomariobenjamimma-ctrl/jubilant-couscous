@@ -237,9 +237,19 @@ color:#7188a8;
 }
 
 @media(max-width:500px){
-.logo{font-size:20px}
-h1{font-size:25px}
-.cards{grid-template-columns:1fr}
+
+.logo{
+font-size:20px;
+}
+
+h1{
+font-size:25px;
+}
+
+.cards{
+grid-template-columns:1fr;
+}
+
 }
 </style>
 </head>
@@ -259,35 +269,58 @@ h1{font-size:25px}
 Converse e conecte-se com outras pessoas.
 </p>
 
+<!-- AUTENTICAÇÃO -->
+
 <div class="auth" id="auth">
 
 <h2 id="authTitulo">Criar conta</h2>
 
-<input id="nome" type="text" placeholder="Seu nome">
+<input
+id="nome"
+type="text"
+placeholder="Seu nome"
+>
 
-<input id="email" type="email" placeholder="Seu e-mail">
+<input
+id="email"
+type="email"
+placeholder="Seu e-mail"
+>
 
-<input id="senha" type="password" placeholder="Sua palavra-passe">
+<input
+id="senha"
+type="password"
+placeholder="Sua palavra-passe"
+>
 
-<button id="btnCriar">Criar conta</button>
+<button id="btnCriar">
+Criar conta
+</button>
 
 <button class="secondary" id="btnModo">
 Já tenho uma conta
 </button>
 
-<p id="authMensagem"
-style="text-align:center;color:#ffcc66;font-size:13px;">
-</p>
+<p
+id="authMensagem"
+style="text-align:center;color:#ffcc66;font-size:13px;"
+></p>
 
 </div>
+
+<!-- UTILIZADOR -->
 
 <div class="userbar" id="userbar">
 
 <div id="usuarioAtual"></div>
 
-<button id="btnSair">Sair</button>
+<button id="btnSair">
+Sair
+</button>
 
 </div>
+
+<!-- CHAT -->
 
 <div class="chat" id="chat">
 
@@ -310,11 +343,15 @@ placeholder="Escreva uma mensagem..."
 autocomplete="off"
 >
 
-<button id="btnEnviar">Enviar</button>
+<button id="btnEnviar">
+Enviar
+</button>
 
 </div>
 
 </div>
+
+<!-- CARTÕES -->
 
 <div class="cards">
 
@@ -350,25 +387,38 @@ autocomplete="off"
 © 2026 Conecta+ — Todos os direitos reservados.
 </footer>
 
+<!-- FIREBASE -->
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
 <script>
 
 const firebaseConfig = {
+
 apiKey:"AIzaSyBAfIlTpRCeisAmEOiRYsTJ3Ie0FeWEkzE",
+
 authDomain:"conecta-6133c.firebaseapp.com",
+
 projectId:"conecta-6133c",
+
 storageBucket:"conecta-6133c.firebasestorage.app",
+
 messagingSenderId:"48961157088",
+
 appId:"1:48961157088:web:d0fd22fdc8760e3c459d85",
+
 measurementId:"G-MEKCSRXVM9"
+
 };
 
 firebase.initializeApp(firebaseConfig);
 
 const auth=firebase.auth();
+
 const db=firebase.firestore();
 
 const authBox=document.getElementById("auth");
@@ -389,42 +439,59 @@ const btnEnviar=document.getElementById("btnEnviar");
 const status=document.getElementById("status");
 
 let modoCriar=true;
+
 let nomeDoUtilizador="";
 
-/* CRIAR / ENTRAR */
+
+/* ============================
+   ALTERNAR CRIAR / ENTRAR
+============================ */
 
 btnModo.addEventListener("click",function(){
 
 modoCriar=!modoCriar;
+
 authMensagem.textContent="";
 
 if(modoCriar){
 
 authTitulo.textContent="Criar conta";
+
 nome.style.display="block";
+
 btnCriar.textContent="Criar conta";
+
 btnModo.textContent="Já tenho uma conta";
 
 }else{
 
 authTitulo.textContent="Entrar";
+
 nome.style.display="none";
+
 btnCriar.textContent="Entrar";
+
 btnModo.textContent="Criar nova conta";
 
 }
 
 });
 
-/* CRIAR CONTA OU ENTRAR */
+
+/* ============================
+   CRIAR CONTA / ENTRAR
+============================ */
 
 btnCriar.addEventListener("click",async function(){
 
 const mail=email.value.trim();
+
 const pass=senha.value.trim();
+
 const nomeUsuario=nome.value.trim();
 
 authMensagem.textContent="";
+
 
 if(mail==="" || pass===""){
 
@@ -435,6 +502,7 @@ return;
 
 }
 
+
 if(pass.length<6){
 
 authMensagem.textContent=
@@ -444,7 +512,11 @@ return;
 
 }
 
+
 try{
+
+
+/* CRIAR CONTA */
 
 if(modoCriar){
 
@@ -457,38 +529,51 @@ return;
 
 }
 
+
 const resultado=
 await auth.createUserWithEmailAndPassword(
 mail,
 pass
 );
 
-/* Guarda o nome no perfil Firebase */
+
+/* Guardar nome no Firebase Authentication */
 
 await resultado.user.updateProfile({
+
 displayName:nomeUsuario
+
 });
 
-/* Guarda também no Firestore */
+
+/* Guardar nome no Firestore */
 
 await db.collection("usuarios")
 .doc(resultado.user.uid)
 .set({
 
-nome:nomeUsuario,
-email:mail,
 uid:resultado.user.uid,
+
+nome:nomeUsuario,
+
+email:mail,
+
 criadoEm:
 firebase.firestore.FieldValue.serverTimestamp()
 
 });
+
 
 nomeDoUtilizador=nomeUsuario;
 
 authMensagem.textContent=
 "Conta criada com sucesso!";
 
+
 }else{
+
+
+/* ENTRAR */
 
 await auth.signInWithEmailAndPassword(
 mail,
@@ -508,26 +593,39 @@ authMensagem.textContent=
 
 });
 
-/* LOGIN */
+
+/* ============================
+   VERIFICAR UTILIZADOR
+============================ */
 
 auth.onAuthStateChanged(async function(user){
 
 if(!user){
 
 authBox.style.display="block";
+
 userbar.style.display="none";
+
 chat.style.display="none";
+
+nomeDoUtilizador="";
+
 return;
 
 }
 
+
 authBox.style.display="none";
+
 userbar.style.display="block";
+
 chat.style.display="block";
+
 
 let nomeExibido="";
 
-/* Primeiro tenta o displayName do Firebase */
+
+/* Primeiro procura no Firebase Authentication */
 
 if(user.displayName){
 
@@ -535,18 +633,22 @@ nomeExibido=user.displayName;
 
 }
 
+
 /* Depois procura no Firestore */
 
 try{
 
-const doc=
+const docUsuario=
+
 await db.collection("usuarios")
 .doc(user.uid)
 .get();
 
-if(doc.exists){
 
-const dados=doc.data();
+if(docUsuario.exists){
+
+const dados=docUsuario.data();
+
 
 if(dados.nome){
 
@@ -556,30 +658,118 @@ nomeExibido=dados.nome;
 
 }
 
-}catch(error){
 
-console.error("Erro ao procurar nome:",error);
+/*
+Se a conta antiga não tiver nome,
+pedimos o nome ao utilizador.
+*/
+
+if(!nomeExibido){
+
+let novoNome=prompt(
+"Digite o seu nome para usar no Conecta+:"
+);
+
+
+if(novoNome){
+
+novoNome=novoNome.trim();
 
 }
 
-/* Última opção */
 
-if(!nomeExibido){
+if(novoNome){
+
+nomeExibido=novoNome;
+
+
+/* Guardar no Authentication */
+
+try{
+
+await user.updateProfile({
+
+displayName:novoNome
+
+});
+
+}catch(e){
+
+console.log(e);
+
+}
+
+
+/* Guardar no Firestore */
+
+await db.collection("usuarios")
+.doc(user.uid)
+.set({
+
+uid:user.uid,
+
+nome:novoNome,
+
+email:user.email || "",
+
+atualizadoEm:
+firebase.firestore.FieldValue.serverTimestamp()
+
+},{merge:true});
+
+
+}else{
 
 nomeExibido="Utilizador";
 
 }
 
+}
+
+}catch(error){
+
+console.error(
+"Erro ao procurar o nome:",
+error
+);
+
+
+/* Tenta usar o nome do Authentication */
+
+if(user.displayName){
+
+nomeExibido=user.displayName;
+
+}else{
+
+nomeExibido="Utilizador";
+
+}
+
+}
+
+
+/* Guardar o nome atual */
+
 nomeDoUtilizador=nomeExibido;
+
+
+/* Mostrar nome */
 
 usuarioAtual.textContent=
 "👤 Olá, "+nomeExibido+"!";
+
+
+/* Carregar chat */
 
 carregarMensagens();
 
 });
 
-/* SAIR */
+
+/* ============================
+   SAIR
+============================ */
 
 btnSair.addEventListener("click",function(){
 
@@ -587,7 +777,10 @@ auth.signOut();
 
 });
 
-/* CARREGAR MENSAGENS */
+
+/* ============================
+   CARREGAR MENSAGENS
+============================ */
 
 function carregarMensagens(){
 
@@ -597,14 +790,18 @@ db.collection("mensagens")
 
 messages.innerHTML="";
 
+
 snapshot.forEach(function(doc){
 
 const dados=doc.data();
 
 const div=document.createElement("div");
 
-if(auth.currentUser &&
-dados.uid===auth.currentUser.uid){
+
+if(
+auth.currentUser &&
+dados.uid===auth.currentUser.uid
+){
 
 div.className="message mine";
 
@@ -614,12 +811,14 @@ div.className="message";
 
 }
 
+
 const nomeDiv=document.createElement("div");
 
 nomeDiv.className="name";
 
 nomeDiv.textContent=
 dados.autor || "Utilizador";
+
 
 const bolha=document.createElement("div");
 
@@ -628,18 +827,23 @@ bolha.className="bubble";
 bolha.textContent=
 dados.texto || "";
 
+
 div.appendChild(nomeDiv);
+
 div.appendChild(bolha);
 
 messages.appendChild(div);
 
 });
 
+
 messages.scrollTop=
 messages.scrollHeight;
 
+
 status.textContent=
 "🟢 Mensagens online";
+
 
 },function(error){
 
@@ -652,34 +856,49 @@ status.textContent=
 
 }
 
-/* ENVIAR MENSAGEM */
+
+/* ============================
+   ENVIAR MENSAGEM
+============================ */
 
 async function enviar(){
 
 const user=auth.currentUser;
+
 const mensagem=texto.value.trim();
 
+
 if(!user || mensagem===""){
+
 return;
+
 }
 
+
 btnEnviar.disabled=true;
+
 
 try{
 
 let nomeUsuario=nomeDoUtilizador;
 
-/* Procura o nome novamente se necessário */
+
+/* Se ainda não houver nome,
+   procurar no Firestore */
 
 if(!nomeUsuario){
 
 const docUsuario=
+
 await db.collection("usuarios")
 .doc(user.uid)
 .get();
 
-if(docUsuario.exists &&
-docUsuario.data().nome){
+
+if(
+docUsuario.exists &&
+docUsuario.data().nome
+){
 
 nomeUsuario=
 docUsuario.data().nome;
@@ -688,7 +907,8 @@ docUsuario.data().nome;
 
 }
 
-/* Última opção */
+
+/* Se ainda não houver nome */
 
 if(!nomeUsuario){
 
@@ -696,6 +916,9 @@ nomeUsuario=
 user.displayName || "Utilizador";
 
 }
+
+
+/* Guardar mensagem */
 
 await db.collection("mensagens").add({
 
@@ -710,8 +933,13 @@ firebase.firestore.FieldValue.serverTimestamp()
 
 });
 
+
+/* Limpar caixa */
+
 texto.value="";
+
 texto.focus();
+
 
 }catch(error){
 
@@ -723,14 +951,21 @@ alert(
 
 }
 
+
 btnEnviar.disabled=false;
 
 }
+
+
+/* Botão enviar */
 
 btnEnviar.addEventListener(
 "click",
 enviar
 );
+
+
+/* Tecla Enter */
 
 texto.addEventListener(
 "keydown",
